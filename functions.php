@@ -1,16 +1,62 @@
 <?php
 
 /**
- * Custom Endpoints
- */
- function tbwp_register_custom_posts() {
-	 register_rest_route('writing/v1', '/posts', [
-		 'methods' => 'GET',
-		 'callback' => 'tbwp_custom_posts'
-	 ]);
- }
+* Home Page Featured
+*/
+function tbwp_register_custom_featured() {
+ register_rest_route('writing/v1', '/featured', [
+	 'methods' => 'GET',
+	 'callback' => 'tbwp_custom_featured'
 
- add_action('rest_api_init', 'tbwp_register_custom_posts');
+ ]);
+}
+add_action('rest_api_init', 'tbwp_register_custom_featured');
+
+function tbwp_custom_featured() {
+
+	$args = array(
+		'numberposts' => -1,
+      'post_type' => 'post',
+      'meta_key'		=> 'featured_on_home_page',
+	   'meta_value'	=> ''
+	);
+
+	$featured_query = get_posts( $args );
+
+	if ( empty( $featured_query ) ) {
+		return null;
+	}
+
+	$featured_posts = [];
+
+	foreach( $featured_query as $query ) {
+
+		$image_id = get_post_thumbnail_id( $query->ID );
+		$query->thumbnail = wp_get_attachment_image_src( $image_id, 'large' );
+
+		$link = get_the_permalink( $query->ID );
+
+		$featured_post = [
+			'id' => $query->ID,
+			'thumbnail' => $query->thumbnail,
+			'title' => $query->post_title,
+			'link' => $query->post_name,
+			'excerpt' => $query->excerpt,
+         'content' => $query->body
+		];
+
+		array_push( $featured_posts, $featured_post );
+	}
+	return $featured_posts;
+}
+
+function tbwp_register_custom_posts() {
+ register_rest_route('writing/v1', '/posts', [
+	 'methods' => 'GET',
+	 'callback' => 'tbwp_custom_posts'
+ ]);
+}
+add_action('rest_api_init', 'tbwp_register_custom_posts');
 
 function tbwp_custom_posts() {
 	$args = array(
@@ -47,6 +93,7 @@ function tbwp_custom_posts() {
 	}
 	return $custom_posts;
 }
+
 
 /**
  * Enqueue scripts and styles.
