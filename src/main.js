@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App.vue';
 import Header from './globals/Header.vue';
+import Menu from './globals/Menu.vue';
 import Footer from './globals/Footer.vue';
 import { routes } from './routes';
 
@@ -14,6 +15,7 @@ const router = new VueRouter({
 });
 
 Vue.component( 'app-header', Header );
+Vue.component( 'app-menu', Menu );
 Vue.component( 'app-footer', Footer );
 
 new Vue({

@@ -1,5 +1,7 @@
 <?php
 
+register_nav_menu( 'primary', __( 'Primary', 'tbwp' ) );
+
 /**
 * Home Page Featured
 */
@@ -50,6 +52,9 @@ function tbwp_custom_featured() {
 	return $featured_posts;
 }
 
+/**
+ * Generates Custom Posts
+ */
 function tbwp_register_custom_posts() {
  register_rest_route('writing/v1', '/posts', [
 	 'methods' => 'GET',
@@ -94,6 +99,53 @@ function tbwp_custom_posts() {
 	return $custom_posts;
 }
 
+/**
+ * Generates Menu Settings for REST API
+ */
+function tbwp_menus_get_all_pages() {
+
+  register_rest_route('writing/v1', '/pages', [
+ 	 'methods' => 'GET',
+ 	 'callback' => 'tbwp_get_pages'
+  ]);
+}
+
+ add_action('rest_api_init', 'tbwp_menus_get_all_pages');
+
+
+/**
+* Get Indvidual Menu Callback
+*/
+function tbwp_get_pages() {
+
+   $args = array(
+      'sort_order' => 'asc',
+      'parent' => 0
+   );
+
+   $pages = get_pages($args);
+
+   if ( empty( $pages ) ) {
+      return null;
+   }
+
+   $custom_pages = [];
+
+   foreach( $pages as $page ) {
+
+      $link = get_the_permalink( $page->ID );
+
+      $custom_page = [
+         'id' => $page->ID,
+         'title' => $page->post_title,
+         'link' => $page->post_name
+      ];
+      array_push( $custom_pages, $custom_page );
+   }
+   return $custom_pages;
+ }
+
+
 
 /**
  * Enqueue scripts and styles.
@@ -105,10 +157,10 @@ function writing_portfolio_scripts() {
 
    wp_enqueue_script('tb-writing-portfolio-scripts', get_template_directory_uri() . '/dist/build.js',['jquery'], time(), true);
 
-wp_localize_script('tb-writing-portfolio-scripts', 'writingportfolio_vars', array(
-        'site_url' => esc_url( site_url() )
-   )
-);
+   wp_localize_script('tb-writing-portfolio-scripts', 'writingportfolio_vars', array(
+           'site_url' => esc_url( site_url() )
+      )
+   );
 
 }
 add_action( 'wp_enqueue_scripts', 'writing_portfolio_scripts' );
