@@ -29,6 +29,9 @@ export default {
             title: {
                rendered: ''
             },
+            excerpt: {
+               rendered: ''
+            },
             link: ''
          },
 

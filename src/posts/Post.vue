@@ -25,17 +25,11 @@ export default {
       }
    },
    mounted: function() {
-      //console.log(restEndPoint);
          var self = this;
-         console.log( this.$route.params.slug  );
-         // jQuery.get( 'http://writing-site.test/wp-json/wp/v2/posts?slug=' + this.$route.params.slug ).always((response) => {
-         //       self.post       =   response[0];
-         //       console.log(self.post);
-         //   });
+         // Need to make this relative, not hard-coded
          Axios.get( 'http://writing-site.test/wp-json/wp/v2/posts?slug=' + this.$route.params.slug)
          .then( function(response) {
             self.post = response.data[0];
-            console.log(self.post);
          })
          .catch( error => {
             alert('There was an error in your request');
