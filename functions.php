@@ -1,5 +1,7 @@
 <?php
 
+add_theme_support( 'post-thumbnails' );
+
 register_nav_menu( 'primary', __( 'Primary', 'tbwp' ) );
 
 /**
@@ -153,7 +155,7 @@ function tbwp_get_pages() {
 function writing_portfolio_scripts() {
 
 	// Theme stylesheet.
-	wp_enqueue_style( 'writing_portfolio-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'writing_portfolio-style', get_stylesheet_directory_uri() . '/dist/css/style.css' );
 
    wp_enqueue_script('tb-writing-portfolio-scripts', get_template_directory_uri() . '/dist/build.js',['jquery'], time(), true);
 
