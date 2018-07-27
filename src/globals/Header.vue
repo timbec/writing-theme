@@ -1,11 +1,14 @@
 <template lang="html">
-
-  <h1>
-    <a href="/">
+<header id="masthead" rel="header">
+ <h1>
+    <router-link to="/">
+         Tim Beckett
+    </router-link>
+   <router-link to="/">
         Writing Portfolio
-    </a>
-  </h1>
-
+   </router-link>
+</h1>
+</header>
 </template>
 
 <script>

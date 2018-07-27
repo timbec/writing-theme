@@ -1,6 +1,5 @@
 <template lang="html">
-   <section>
-      <h1>Home Page</h1>
+   <section id="home-page" class="container">
       <article v-for="feature in features">
 
          <figure v-if="feature.thumbnail.length">
