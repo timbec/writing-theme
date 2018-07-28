@@ -1,9 +1,7 @@
 <template lang="html">
    <footer class="container text-center">
       <p>{{ footer_text }}</p>
-      <p>
-           <a href="#">Back to top</a>
-      </p>
+      
    </footer>
 
 </template>

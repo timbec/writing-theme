@@ -80,6 +80,9 @@ function tbwp_custom_posts() {
 
 	foreach( $custom_query as $query ) {
 
+
+      print_r($query);
+
 		$image_id = get_post_thumbnail_id( $query->ID );
 		$query->thumbnail = wp_get_attachment_image_src( $image_id, 'large' );
 
@@ -100,6 +103,116 @@ function tbwp_custom_posts() {
 	}
 	return $custom_posts;
 }
+
+/**
+ * Generates Fiction Posts for Custom REST API
+ */
+function tbwp_fiction_get_all_fiction() {
+
+  register_rest_route('writing/v1', '/fiction', [
+ 	 'methods' => 'GET',
+ 	 'callback' => 'tbwp_get_fiction'
+  ]);
+}
+
+ add_action('rest_api_init', 'tbwp_fiction_get_all_fiction');
+
+
+/**
+* Get Indvidual Fiction Page Callback
+*/
+function tbwp_get_fiction() {
+
+   $args = array(
+      'sort_order' => 'asc',
+      'category_name' => 'fiction'
+   );
+
+   $fiction_posts = get_posts($args);
+
+   if ( empty( $fiction_posts ) ) {
+      return null;
+   }
+
+   $custom_fiction_posts = [];
+
+	foreach( $fiction_posts as $query ) {
+
+		$image_id = get_post_thumbnail_id( $query->ID );
+		$query->thumbnail = wp_get_attachment_image_src( $image_id, 'large' );
+
+		$link = get_the_permalink( $query->ID );
+
+		$custom_post = [
+			'id' => $query->ID,
+			'thumbnail' => $query->thumbnail,
+			'title' => $query->post_title,
+			'link' => $query->post_name,
+			'excerpt' => $query->post_excerpt,
+         'content' => $query->post_content
+		];
+      array_push( $custom_fiction_posts, $custom_post );
+   }
+   return $custom_fiction_posts;
+ }
+
+
+
+ /**
+  * Generates Fiction Posts for Custom REST API
+  */
+ function tbwp_nonfiction_get_all_nonfiction() {
+
+   register_rest_route('writing/v1', '/non-fiction', [
+  	 'methods' => 'GET',
+  	 'callback' => 'tbwp_get_nonfiction'
+   ]);
+ }
+
+  add_action('rest_api_init', 'tbwp_nonfiction_get_all_nonfiction');
+
+
+ /**
+ * Get Indvidual Non Fiction Page Callback
+ */
+ function tbwp_get_nonfiction() {
+
+    $args = array(
+       'sort_order' => 'asc',
+       'category_name' => 'non-fiction',
+       'posts_per_page' => '-1'
+    );
+
+    $nonfiction_posts = get_posts($args);
+
+    if ( empty( $nonfiction_posts ) ) {
+       return null;
+    }
+
+    $custom_nonfiction_posts = [];
+
+ 	foreach( $nonfiction_posts as $query ) {
+
+ 		$image_id = get_post_thumbnail_id( $query->ID );
+ 		$query->thumbnail = wp_get_attachment_image_src( $image_id, 'large' );
+
+ 		$link = get_the_permalink( $query->ID );
+
+ 		$custom_post = [
+ 			'id' => $query->ID,
+ 			'thumbnail' => $query->thumbnail,
+ 			'title' => $query->post_title,
+ 			'link' => $query->post_name,
+ 			'excerpt' => $query->post_excerpt,
+          'content' => $query->post_content
+ 		];
+       array_push( $custom_nonfiction_posts, $custom_post );
+    }
+    return $custom_nonfiction_posts;
+  }
+
+
+
 
 /**
  * Generates Menu Settings for REST API

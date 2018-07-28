@@ -3,7 +3,7 @@
   <nav>
      <ul>
         <li v-for="page in pages">
-           <router-link :to="page.link">{{ page.title }}</router-link>
+           <router-link :to="'/' + page.link">{{ page.title }}</router-link>
         </li>
      </ul>
   </nav>

@@ -11,6 +11,9 @@ License:            MIT License
 License URI:        http://opensource.org/licenses/MIT
 */
 
+@import 'layouts/base';
+@import 'layouts/home';
+
 h1 {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -38,7 +41,7 @@ a {
   color: #09012d;
   text-decoration: none;
   text-transform: uppercase;
-  font-family: "Helvetica Neue", Helvetica, sans-serif; 
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
 }
 
 
