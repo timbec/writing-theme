@@ -270,7 +270,7 @@ function writing_portfolio_scripts() {
 	// Theme stylesheet.
 	wp_enqueue_style( 'writing_portfolio-style', get_stylesheet_directory_uri() . '/dist/css/style.css' );
 
-   wp_enqueue_script('tb-writing-portfolio-scripts', get_template_directory_uri() . '/dist/build.js',['jquery'], time(), true);
+   wp_enqueue_script('tb-writing-portfolio-scripts', get_template_directory_uri() . '/dist/main.js',['jquery'], time(), true);
 
    wp_localize_script('tb-writing-portfolio-scripts', 'writingportfolio_vars', array(
            'site_url' => esc_url( site_url() )

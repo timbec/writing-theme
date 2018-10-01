@@ -11,8 +11,24 @@ License:            MIT License
 License URI:        http://opensource.org/licenses/MIT
 */
 
-@import 'layouts/base';
-@import 'layouts/home';
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'abstracts/functions';
+
+@import 'base/base';
+@import 'base/typography';
+@import 'base/utilities';
+
+@import 'layouts/grid';
+@import 'layouts/header';
+
+@import 'pages/home';
+@import 'pages/list-pages';
+@import 'pages/single-page';
+
+@import 'components/home-boxes';
+
+
 
 h1 {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

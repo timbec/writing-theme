@@ -1,6 +1,6 @@
 <template lang="html">
-   <section id="-page" class="container">
-      <h1>Fiction Page</h1>
+   <section id="nonfiction-page" class="container">
+      <h1>Non Fiction Page</h1>
       <article v-for="post in posts">
 
          <figure v-if="post.thumbnail.length">
@@ -37,7 +37,7 @@ export default {
    },
    computed: {
       restEndPoint() {
-         return `${this.siteURL}/wp-json/writing/v1/fiction`;
+         return `${this.siteURL}/wp-json/writing/v1/non-fiction`;
       }
    },
    mounted() {

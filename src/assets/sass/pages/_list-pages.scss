@@ -1,0 +1,40 @@
+/*List Pages: Fiction/NonFiction etc*/
+
+.list-container {
+
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   grid-gap: 2rem;
+
+   article {
+      // grid-column: 1 / span 2;
+      position: relative;
+
+      figure {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         display: block;
+
+         img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+         }
+      }
+
+      h3 {
+         position: absolute;
+         left: 50%;
+         top: 50%;
+         -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+
+          a {
+             color: white;
+          }
+      }
+
+   }
+}

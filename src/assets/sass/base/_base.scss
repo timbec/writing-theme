@@ -1,0 +1,22 @@
+
+*,
+*::before,
+*::after {
+   margin: 0;
+   padding: 0;
+   box-sizing: inherit;
+}
+
+html {
+   font-size: 62.5%; //this defines 1rem: 10px;
+}
+
+body {
+   // padding: 3rem;
+   font-family: "Lato", sans-serif; 
+}
+
+::selection {
+   background-color: $color-grey-light;
+   color: $color-white;
+}

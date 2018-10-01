@@ -1,8 +1,9 @@
 <template lang="html">
    <article class="article">
-      {{ post.content.rendred }}
-      <h1>{{ post.title.rendered }}</h1>
-      <p v-html="post.content.rendered"></p>
+      <h1 class="article__title">{{ post.title.rendered }}</h1>
+      <div v-html="post.content.rendered"
+         class="article__content"
+      ></div>
    </article>
 
 </template>

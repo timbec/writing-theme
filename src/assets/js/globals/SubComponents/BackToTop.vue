@@ -51,6 +51,7 @@ export default {
         bottom: 15px;
         border: none;
         opacity: 0;
+        border: 1px solid #09021d;
         z-index: -1;
     }
 
@@ -61,7 +62,6 @@ export default {
     .goTop:hover {
         opacity: 1;
         background-color: #fff;
-        border: 2px solid #09021d;
     }
     .goTop:hover > .fa {
        color: #09021d;
@@ -71,6 +71,6 @@ export default {
     .isVisible {
     opacity: .8;
     z-index: 4;
-    transition: all .4s ease-in;
+    transition: all .2s ease-in;
     }
 </style>
